@@ -1,8 +1,14 @@
-export const FeedbackItem = ({ text, rating }) => {
+import { Card } from '.';
+import { FaTimes } from 'react-icons/fa';
+
+export const FeedbackItem = ({ id, text, rating, handleDelete }) => {
   return (
-    <div className="card">
+    <Card>
       <div className="num-display">{rating}</div>
+      <button className="close" onClick={() => handleDelete(id)}>
+        <FaTimes color="purple" />
+      </button>
       <div className="text-display">{text}</div>
-    </div>
+    </Card>
   );
 };
