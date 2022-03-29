@@ -8,10 +8,11 @@ export const FeedbackList = () => {
 
   if (!feedback || feedback.length === 0) return <p>No Feed yet</p>;
 
+  const reverseFeedback = feedback?.slice().reverse();
   return (
     <div className="feedback-list">
       <AnimatePresence>
-        {feedback?.map((item) => {
+        {reverseFeedback?.map((item) => {
           return (
             <motion.div
               key={item.id}
