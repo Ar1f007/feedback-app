@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import FeedbackData from './data/feedbackData';
+import { nanoid } from 'nanoid/async';
 
 import { Header, FeedbackList, FeedbackStats, FeedbackForm } from './components';
 
@@ -12,11 +13,20 @@ const App = () => {
     }
   };
 
+  const addFeedback = async (newFeedback) => {
+    try {
+      newFeedback.id = await nanoid();
+      setFeedback([...feedback, newFeedback]);
+    } catch (error) {
+      console.log('Something wrong happened');
+    }
+  };
+
   return (
     <>
       <Header text={'Feedback Ui'} />
       <div className="container">
-        <FeedbackForm />
+        <FeedbackForm handleAdd={addFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
       </div>
