@@ -5,5 +5,15 @@ import { Card } from './shared/Card';
 import { FeedbackStats } from './FeedbackStats';
 import { FeedbackForm } from './FeedbackForm';
 import { RatingSelect } from './RatingSelect';
+import { AboutLinkIcon } from './AboutLinkIcon';
 
-export { Header, FeedbackItem, FeedbackList, Card, FeedbackStats, FeedbackForm, RatingSelect };
+export {
+  Header,
+  FeedbackItem,
+  FeedbackList,
+  Card,
+  FeedbackStats,
+  FeedbackForm,
+  RatingSelect,
+  AboutLinkIcon,
+};
