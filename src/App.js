@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid/async';
-import FeedbackData from './data/feedbackData';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { nanoid } from 'nanoid/async';
 
+import FeedbackData from './data/feedbackData';
 import { Header, FeedbackList, FeedbackStats, FeedbackForm, AboutLinkIcon } from './components';
 import { About } from './pages/About';
+
+import { FeedbackProvider } from './context/FeedbackContext';
 
 const App = () => {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -25,26 +27,28 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header text={'Feedback Ui'} />
-              <div className="container">
-                <FeedbackForm handleAdd={addFeedback} />
-                <FeedbackStats feedback={feedback} />
-                <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
-              </div>
-              <AboutLinkIcon />
-            </>
-          }
-        />
+    <FeedbackProvider>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header text={'Feedback Ui'} />
+                <div className="container">
+                  <FeedbackForm handleAdd={addFeedback} />
+                  <FeedbackStats feedback={feedback} />
+                  <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+                </div>
+                <AboutLinkIcon />
+              </>
+            }
+          />
 
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Router>
+    </FeedbackProvider>
   );
 };
 export default App;
