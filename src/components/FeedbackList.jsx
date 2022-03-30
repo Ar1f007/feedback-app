@@ -2,17 +2,19 @@ import { FeedbackItem } from './';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContext } from 'react';
 import FeedbackContext from '../context/FeedbackContext';
+import { Spinner } from './shared/Spinner';
 
 export const FeedbackList = () => {
-  const { feedback } = useContext(FeedbackContext);
+  const { feedback, isLoading } = useContext(FeedbackContext);
 
-  if (!feedback || feedback.length === 0) return <p>No Feed yet</p>;
+  if (!isLoading && (!feedback || feedback.length === 0)) return <p>No Feed yet</p>;
 
-  const reverseFeedback = feedback?.slice().reverse();
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className="feedback-list">
       <AnimatePresence>
-        {reverseFeedback?.map((item) => {
+        {feedback?.map((item) => {
           return (
             <motion.div
               key={item.id}
